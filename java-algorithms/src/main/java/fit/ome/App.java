@@ -12,10 +12,7 @@ public class App {
 //        int[] nums=new int[3];
         OmeSort os = new Sort_1_Bubble();
         int[] nums = {17, 5, 3, 1, 3, 7, 8, 5, 2, 0, 4};// length=10
-        // quick
-        // =1
-        // partitionIndex=11 nums={ 4,5, 3, 1, 3, 7, 8, 5, 2, 0, 17}
-        // partitionIndex=5   nums={5,}
+
         // ----
 //        swap(nums,0,1);
 //        printArray(nums);
@@ -26,9 +23,18 @@ public class App {
         printArray(os.sort(nums.clone()));
         os = new Sort_4_Shell();
         printArray(os.sort(nums.clone()));
+        System.out.println("------merge------");
         os = new Sort_5_Merge();
         printArray(os.sort(nums.clone()));
+        System.out.println("------quick------");
+        // quick
+        // =1
+        // partitionIndex=11 nums={ 4,5, 3, 1, 3, 7, 8, 5, 2, 0, 17}
+        // partitionIndex=5   nums={5,}
         os = new Sort_6_Quick();
+        printArray(os.sort(nums.clone()));
+        System.out.println("------heap------");
+        os = new Sort_7_Heap();
         printArray(os.sort(nums.clone()));
     }
 
