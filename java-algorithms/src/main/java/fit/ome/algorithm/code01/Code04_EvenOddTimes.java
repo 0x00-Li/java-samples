@@ -1,4 +1,4 @@
-package fit.ome.algorithm;
+package fit.ome.algorithm.code01;
 
 import java.util.HashMap;
 import java.util.Map;

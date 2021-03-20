@@ -1,4 +1,4 @@
-package fit.ome.algorithm;
+package fit.ome.algorithm.code01;
 
 /**
  * 选择排序，目标是选出最小值放在合适的位置

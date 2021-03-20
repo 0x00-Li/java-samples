@@ -1,4 +1,4 @@
-package fit.ome.algorithm;
+package fit.ome.algorithm.code01;
 
 /**
  * 在一个数组中，某个数出现了k次，其他的数都出现了m次，k>1 ,k<m

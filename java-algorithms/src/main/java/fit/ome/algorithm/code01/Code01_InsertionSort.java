@@ -1,4 +1,4 @@
-package fit.ome.algorithm;
+package fit.ome.algorithm.code01;
 
 /**
  * 插入排序
