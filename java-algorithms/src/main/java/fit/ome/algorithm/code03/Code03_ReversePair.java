@@ -4,6 +4,10 @@ package fit.ome.algorithm.code03;
  * 求逆序对总数
  * 在一个数组中，任何一个前面的数啊，和任何一个后面的数b,如果（a,b）是逆序，就称为逆序对；
  * 返回数组中的所有的逆序对数量
+ * <br>
+ * 使用归并排序，在归并阶段，比较左右数进行求和
+ * 1. 在每次归并的的时候，如果左侧的数大于右侧的数，就会大于右侧留存的所有的数
+ * 2. 注意 左右相等的边界，相等的时候，应该让右侧数据，优先归并，保持左侧数据继续和右侧进行对比
  *
  * @version 0.0.1-SNAPSHOT
  * @auther Zero
@@ -58,7 +62,7 @@ public class Code03_ReversePair {
         int res = 0;
         for (int i = 1; i < arr.length; i++) {
             for (int j = i - 1; j >= 0; j--) {
-                if(arr[j] > arr[i]){
+                if (arr[j] > arr[i]) {
                     res++;
                 }
             }
