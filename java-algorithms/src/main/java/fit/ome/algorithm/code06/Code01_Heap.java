@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
  * <br>
  * 默认实现，构建大根堆
  */
-public class Heap {
+public class Code01_Heap {
     /**
      * 自己实现 的 大根堆
      */
