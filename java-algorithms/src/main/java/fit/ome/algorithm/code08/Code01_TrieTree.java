@@ -1,4 +1,4 @@
-package fit.ome.algorithm.code07;
+package fit.ome.algorithm.code08;
 
 /**
  * Trie Tree
