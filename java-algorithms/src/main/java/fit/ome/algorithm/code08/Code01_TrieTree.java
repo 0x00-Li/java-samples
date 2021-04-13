@@ -14,9 +14,9 @@ public class Code01_TrieTree {
 
         LetterNode[] nexts;
 
-        public LetterNode(int p, int e) {
-            this.pass = p;
-            end = e;
+        public LetterNode() {
+            this.pass = 0;
+            end = 0;
             /**
              * 只有26个英文字母，所以定义路线数只有26个
              */
@@ -32,7 +32,7 @@ public class Code01_TrieTree {
         LetterNode root;
 
         public LetterTireTree() {
-            root = new LetterNode(0, 0);
+            root = new LetterNode();
         }
 
         /**
@@ -41,7 +41,21 @@ public class Code01_TrieTree {
          * @param word
          */
         public void insert(String word) {
-
+            if (word == null) {
+                return;
+            }
+            char[] s = word.toCharArray();
+            LetterNode node = root;
+            node.pass++;
+            for (int i = 0; i < s.length; i++) {
+                int index = s[i] - 'a';
+                if (node.nexts[index] == null) {
+                    node.nexts[index] = new LetterNode();
+                }
+                node = node.nexts[index];
+                node.pass++;
+            }
+            node.end++;
         }
 
         /**
@@ -50,6 +64,22 @@ public class Code01_TrieTree {
          * @param word
          */
         public void delete(String word) {
+            if (word == null) {
+                return;
+            }
+            char[] s = word.toCharArray();
+            LetterNode node = root;
+            int index = 0;
+            node.pass--;
+            for (int i = 0; i < s.length; i++) {
+                index = s[i] - 'a';
+                if (--node.nexts[index].pass == 0) {
+                    node.nexts[index] = null;
+                    return;
+                }
+                node = node.nexts[index];
+            }
+            node.end--;
 
         }
 
@@ -60,7 +90,20 @@ public class Code01_TrieTree {
          * @return
          */
         public int search(String word) {
-            return 0;
+            if(word==null){
+                return 0;
+            }
+            char[] s = word.toCharArray();
+            LetterNode node=root;
+            int index=0;// 字母在数组中对应的位置
+            for (int i = 0; i < s.length; i++) {
+                index=s[i]-'a';
+                if(node.nexts[index]==null){
+                    return 0;
+                }
+                node=node.nexts[index];
+            }
+            return node.end;
         }
 
         /**
@@ -70,7 +113,20 @@ public class Code01_TrieTree {
          * @return
          */
         public int searchPrefix(String word) {
-            return 0;
+            if(word==null){
+                return 0;
+            }
+            char[] s = word.toCharArray();
+            LetterNode node=root;
+            int index=0;// 字母在数组中对应的位置
+            for (int i = 0; i < s.length; i++) {
+                index=s[i]-'a';
+                if(node.nexts[index]==null){
+                    return 0;
+                }
+                node=node.nexts[index];
+            }
+            return node.pass;
         }
 
     }
