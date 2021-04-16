@@ -49,17 +49,29 @@ public class Code04_RadixSort {
                 count[j] = count[j] + count[j - 1];
             }
 
-            // 填充help数组
-            for (int j = r; j>=l; j--) {
+//             填充help数组
+            // 必须从右向左遍历
+            // 全局是从低位到高位遍历
+            // 个位遍历的时候，已经按照从小到大的顺序放入到辅助数组中
+            // 十位遍历的时候，在十位相等的时候，应该先获取个位大的数，放入的连续顺序是根据词频统计的量级从高索引到低索引进行填充的
+            // 所以，在某个位的数值相等的话，依赖已经排好的相邻低位置的真是值
+            for (int j = r; j >= l; j--) {
                 int digit = getDigit(arr[j], i);
                 help[count[digit] - 1] = arr[j];
                 count[digit]--;
             }
 
+//            for (int j = l; j <= r; j++) {
+//                int digit = getDigit(arr[j], i);
+//                help[count[digit] - 1] = arr[j];
+//                count[digit]--;
+//            }
+
             // 回填arr
-            for (int j = 0; j < arr.length; j++) {
+            for (int j = l; j <= r; j++) {
                 arr[j] = help[j];
             }
+            printArr(arr);
         }
     }
 
@@ -114,22 +126,32 @@ public class Code04_RadixSort {
         return true;
     }
 
-    public static void main(String[] args) {
-        int maxVal = 1000;
-        int maxSize = 100;
-        int opTimes = 10000;
-        for (int i = 0; i < opTimes; i++) {
-            int[] arr = generateRandomArr(maxVal, maxSize);
-            int[] arr1 = arr.clone();
-            radixSort(arr1);
-            int[] arr2 = arr.clone();
-            sort(arr2);
-            if (!isEqual(arr1, arr2)) {
-                System.out.println("Oops!!!");
-                break;
-            }
+    public static void printArr(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + ",");
         }
-        System.out.println("finish");
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] arr = new int[]{132, 143, 146, 141};
+        radixSort(arr);
+
+//        int maxVal = 1000;
+//        int maxSize = 5;
+//        int opTimes = 10000;
+//        for (int i = 0; i < opTimes; i++) {
+//            int[] arr = generateRandomArr(maxVal, maxSize);
+//            int[] arr1 = arr.clone();
+//            radixSort(arr1);
+//            int[] arr2 = arr.clone();
+//            sort(arr2);
+//            if (!isEqual(arr1, arr2)) {
+//                System.out.println("Oops!!!");
+//                break;
+//            }
+//        }
+//        System.out.println("finish");
     }
 }
 
