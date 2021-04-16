@@ -60,11 +60,7 @@ public class Code04_RadixSort {
             for (int j = 0; j < arr.length; j++) {
                 arr[j] = help[j];
             }
-
-
         }
-
-
     }
 
     /**
