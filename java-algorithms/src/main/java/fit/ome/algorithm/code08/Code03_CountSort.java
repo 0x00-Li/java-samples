@@ -8,6 +8,11 @@ import java.util.Arrays;
  * 基于计数的排序
  * <p>
  * 桶排序
+ *
+ * 限制：
+ * 必须知道数组中的最大值
+ *
+ *
  */
 public class Code03_CountSort {
 
