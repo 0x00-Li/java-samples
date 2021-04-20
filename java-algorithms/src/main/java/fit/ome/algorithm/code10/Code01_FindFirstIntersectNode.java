@@ -62,8 +62,47 @@ public class Code01_FindFirstIntersectNode {
      * @return
      */
     public static Node loopNode(Node head1, Node loop1, Node head2, Node loop2) {
+        Node curr1 = null;
+        Node curr2 = null;
+        if (loop1 == loop2) {
+// 共同入环节点
+            curr1 = head1;
+            curr2 = head2;
+            int len = 0;
+            while (curr1 != loop1) {
+                curr1 = curr1.next;
+                len++;
+            }
+            curr2 = head2;
+            while (curr2 != loop2) {
+                curr2 = curr2.next;
+                len--;
+            }
+            Node lHead = len > 0 ? head1 : head2;
+            Node sHead = lHead == head1 ? head2 : head1;
+            len = Math.abs(len);
+            while (len > 0) {
+                lHead = lHead.next;
+                len--;
+            }
+            while (lHead != sHead) {
+                lHead = lHead.next;
+                sHead = sHead.next;
+            }
+            return sHead;
 
-        return null;
+        } else {
+//            不同的入环节点
+            curr1 = loop1.next;
+            while (curr1 != loop1) {
+                if (curr1 == loop2) {
+                    return loop1;
+                }
+                curr1 = curr1.next;
+            }
+            return null;
+        }
+
     }
 
     /**
