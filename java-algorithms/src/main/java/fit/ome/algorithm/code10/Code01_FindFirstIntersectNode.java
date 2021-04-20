@@ -148,10 +148,12 @@ public class Code01_FindFirstIntersectNode {
         int len = 0;
         while (curr != null) {
             len++;
+            curr=curr.next;
         }
         curr = head2;
         while (curr != null) {
             len--;
+            curr= curr.next;
         }
         Node lNode = len > 0 ? head1 : head2;// 长链表头
         Node sNode = lNode == head1 ? head2 : head1; //短链表头
@@ -186,7 +188,7 @@ public class Code01_FindFirstIntersectNode {
         Node slow = head.next;
 
         while (fast != slow) {
-            if (fast == null || slow == null) {
+            if (fast.next == null || fast.next.next == null) {
                 // 无环
                 return null;
             }
@@ -202,6 +204,71 @@ public class Code01_FindFirstIntersectNode {
             slow = slow.next;
         }
         return slow;
+
+    }
+
+    public static void main(String[] args) {
+        // Y 形状的
+        Node head1=new Node(1);
+        head1.next=new Node(2);
+        head1.next.next=new Node(3);
+        head1.next.next.next=new Node(4);
+        head1.next.next.next.next=new Node(5);
+        head1.next.next.next.next.next=new Node(6);
+        head1.next.next.next.next.next.next=new Node(7);
+
+        Node head2=new Node(10);
+        head2.next=new Node(11);
+        head2.next.next=new Node(12);
+        head2.next.next.next=new Node(14);
+        head2.next.next.next.next=new Node(15);
+        head2.next.next.next.next.next=head1.next.next.next.next.next;//6
+        System.out.println(firstIntersectNode(head1,head2).val);
+        // 环外相交 形状的
+        head1=new Node(1);
+        head1.next=new Node(2);
+        head1.next.next=new Node(3);
+        head1.next.next.next=new Node(4);
+        head1.next.next.next.next=new Node(5);
+        head1.next.next.next.next.next=new Node(6);
+        head1.next.next.next.next.next.next=new Node(7);
+
+        head2=new Node(10);
+        head2.next=new Node(11);
+        head2.next.next=new Node(12);
+        head2.next.next.next=new Node(14);
+        head2.next.next.next.next=new Node(15);
+        head2.next.next.next.next.next=head1.next.next.next.next.next;//6
+
+        head1.next.next.next.next.next.next.next=new Node(8);
+        head1.next.next.next.next.next.next.next.next=new Node(9);
+        head1.next.next.next.next.next.next=new Node(10);
+        head1.next.next.next.next.next.next=head1.next.next.next.next.next.next;// 指向7
+
+//        环上相交
+        head1=new Node(1);
+        head1.next=new Node(2);
+        head1.next.next=new Node(3);
+        head1.next.next.next=new Node(4);
+        head1.next.next.next.next=new Node(5);
+        head1.next.next.next.next.next=new Node(6);
+        head1.next.next.next.next.next.next=new Node(7);
+        head1.next.next.next.next.next.next.next=new Node(8);
+
+        head1.next.next.next.next.next.next.next.next=new Node(9);
+        head1.next.next.next.next.next.next.next.next.next=new Node(10);
+        head1.next.next.next.next.next.next.next.next.next=head1.next.next.next.next.next.next;// 指向7
+
+        head2=new Node(10);
+        head2.next=new Node(11);
+        head2.next.next=new Node(12);
+        head2.next.next.next=new Node(14);
+        head2.next.next.next.next=new Node(15);
+        head2.next.next.next.next.next=new Node(8);//6
+
+        head2.next.next.next.next.next.next=head1.next.next.next.next.next.next.next.next;// 9
+
+        System.out.println(firstIntersectNode(head2,head1).val);
 
     }
 
