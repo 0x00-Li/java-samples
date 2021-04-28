@@ -1,6 +1,5 @@
 package fit.ome.sort.impl;
 
-import fit.ome.App;
 import fit.ome.sort.OmeSort;
 
 /**

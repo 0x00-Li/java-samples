@@ -46,7 +46,6 @@ public class Code01_MorrisTraversal {
                 while (mostRight.right != null && mostRight.right != curr) {
                     mostRight = mostRight.right;
                 }
-
                 if (mostRight.right == null) {
                     // 首次到达最右，最右指针指向当前节点
                     mostRight.right = curr;
