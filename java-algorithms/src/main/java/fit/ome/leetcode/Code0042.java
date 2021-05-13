@@ -62,9 +62,32 @@ public class Code0042 {
             v = val;
         }
     }
+
     // 考虑动态规划解法
+    // 构建左侧和右侧最大值辅助数组
+    public int trap1(int[] height) {
+        if (height == null || height.length < 3) {
+            return 0;
+        }
+        int sum = 0;
+        int[] leftMax = new int[height.length];
+        leftMax[0] = height[0];
+        for (int i = 1; i < height.length - 1; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+        }
+        int[] rightMax = new int[height.length];
+        rightMax[height.length - 1] = height[height.length - 1];
+        for (int i = height.length - 2; i > 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+        }
+        for (int i = 1; i < height.length-1; i++) {
+            sum += Math.min(leftMax[i], rightMax[i]) - height[i];
+        }
+        return sum;
+    }
+
 
     public static void main(String[] args) {
-        System.out.println(new Code0042().trap(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
+        System.out.println(new Code0042().trap1(new int[]{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1}));
     }
 }
