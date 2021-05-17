@@ -7,7 +7,7 @@ package fit.ome.leetcode;
  * @auther Zero
  * @date 2021/5/16
  **/
-public class Code543 {
+public class Code0543 {
     public static class TreeNode {
         int val;
         TreeNode left;

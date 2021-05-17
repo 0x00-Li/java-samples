@@ -8,6 +8,8 @@ package fit.ome.leetcode;
  * 使用backtrack 解决
  */
 public class Code0062 {
+
+
     public int uniquePaths1(int m, int n) {
 
 
@@ -54,7 +56,31 @@ public class Code0062 {
         }
     }
 
+    //==============================
+    // 暴力递归实现
+    public int uniquePaths2(int m, int n) {
+
+
+        int[][] dp = new int[m][n];
+        dp[0][0] = 1;
+        for (int i = 1; i < m; i++) {
+            dp[i][0] = 1;
+        }
+        for (int i = 0; i < n; i++) {
+            dp[0][i] = 1;
+        }
+        for (int i = 1; i < n; i++) {
+            for (int j = 1; j < m; j++) {
+                dp[j][i]=dp[j-1][i]+dp[j][i-1];
+            }
+        }
+        return dp[m - 1][n - 1];
+
+    }
+
+
+
     public static void main(String[] args) {
-        System.out.println(new Code0062().uniquePaths1(3, 2));
+        System.out.println(new Code0062().uniquePaths2(4, 2));
     }
 }
