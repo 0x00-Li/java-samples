@@ -15,45 +15,43 @@ public class Code0076 {
         }
         int[] strCount = new int[58];// str的词频统计
 
-
+        int[] tCount = new int[58];// t词频
+        for (int i = 0; i < ts.length; i++) {
+            tCount[ts[i] - 'A']++;
+        }
         int slow = 0;
         int fast = slow;
-        while (fast < ts.length) {
-            strCount[str[fast++] - 'A']++;
-        }
+
         int start = -1;
         int end = -1;
         while (slow < str.length) {
             int index = 0;
             while (index < ts.length) {
-                if (strCount[ts[index] - 'A'] > 0) {
+                if (strCount[ts[index] - 'A'] >= tCount[ts[index] - 'A']) {
                     index++;
                 } else {
                     if (fast < str.length) {
                         strCount[str[fast++] - 'A']++;
-                    }else {
+                    } else {
                         break;
                     }
                 }
             }
-            if (index == ts.length - 1) {
+            if (index == ts.length) {
                 if (start == -1 || end == -1) {
                     start = slow;
                     end = fast;
-                } else if (fast - end < end - fast) {
+                } else if (fast - slow < end - start) {
                     start = slow;
                     end = fast;
                 }
             }
             strCount[str[slow++] - 'A']--;
         }
-        return start == -1 || end == -1 ? "" : s.substring(start, end + 1);
+        return start == -1 || end == -1 ? "" : s.substring(start, end);
     }
 
     public static void main(String[] args) {
-        System.out.println((int) 'z');
-        System.out.println((int) 'a');
-        System.out.println((int) 'Z');
-        System.out.println((int) 'A');
+        System.out.println(new Code0076().minWindow("aa", "aa"));
     }
 }
