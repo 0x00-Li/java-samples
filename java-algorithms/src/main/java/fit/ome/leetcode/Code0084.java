@@ -1,6 +1,7 @@
 package fit.ome.leetcode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
@@ -19,6 +20,58 @@ import java.util.Stack;
  * @date 2021/5/23
  **/
 public class Code0084 {
+    public int largestRectangleArea6(int[] heights) {
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<>();// 单调栈，里面存放相应的位置
+        int[] left = new int[len];
+        int[] right = new int[len];
+        for (int i = 0; i < len; i++) {
+            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+                stack.pop();// 弹出所有比当期值大或者相等的，最后可以判断出，当期位置的最左的比自己小的值
+            }
+            left[i] = stack.isEmpty() ? -1: stack.peek();
+            stack.push(i);
+        }
+        stack.clear();
+        for (int i = len - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+                stack.pop();
+            }
+            right[i] = stack.isEmpty() ? len : stack.peek();
+            stack.push(i);
+        }
+        int maxArea = 0;
+        for (int i = 0; i < len; i++) {
+            maxArea = Math.max(maxArea, heights[i] * (right[i] - left[i]-1));
+        }
+        return maxArea;
+    }
+    public int largestRectangleArea7(int[] heights) {
+        int len = heights.length;
+        Stack<Integer> stack = new Stack<>();// 单调栈，里面存放相应的位置
+        int[] left = new int[len];
+        int[] right = new int[len];
+        Arrays.fill(right,len);
+        for (int i = 0; i < len; i++) {
+            while (!stack.isEmpty() && heights[i] <= heights[stack.peek()]) {
+                right[stack.peek()]=i;
+                stack.pop();// 弹出所有比当期值大或者相等的，最后可以判断出，当期位置的最左的比自己小的值
+            }
+            left[i] = stack.isEmpty() ? -1: stack.peek();
+            stack.push(i);
+        }
+
+        int maxArea = 0;
+        for (int i = 0; i < len; i++) {
+            maxArea = Math.max(maxArea, heights[i] * (right[i] - left[i]-1));
+        }
+        return maxArea;
+    }
+
+
+    // -------------- 下方实现失败
+
+
     public int largestRectangleArea1(int[] heights) {
         int len = heights.length;
         if (len == 0) {
@@ -168,7 +221,7 @@ public class Code0084 {
     }
 
     public void findRightMax(int[] heights, int[] rightMax, int i, int j) {
-        if (j >= heights.length||i<0) {
+        if (j >= heights.length || i < 0) {
             return;
         }
         if (heights[j] == heights[i]) {
@@ -181,11 +234,11 @@ public class Code0084 {
                 findRightMax(heights, rightMax, i, j + 1);
             }
         }
-        findRightMax(heights,rightMax,i-1,i);
+        findRightMax(heights, rightMax, i - 1, i);
     }
 
     public void findLeftMax(int[] heights, int[] leftMax, int i, int j) {
-        if (j < 0||i>=heights.length) {
+        if (j < 0 || i >= heights.length) {
             return;
         }
         if (heights[j] == heights[i]) {
@@ -199,36 +252,12 @@ public class Code0084 {
             }
         }
 
-        findLeftMax(heights,leftMax,i+1,i);
+        findLeftMax(heights, leftMax, i + 1, i);
     }
 
     public static void main(String[] args) {
-        new Code0084().largestRectangleArea3(new int[]{1,2,3,4,5});
+        new Code0084().largestRectangleArea3(new int[]{1, 2, 3, 4, 5});
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     public int largestRectangleArea(int[] heights) {
