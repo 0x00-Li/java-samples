@@ -10,12 +10,14 @@ public class UnionFind {
     // i所在的集合大小是多少
     private int[] size;
     // 辅助结构
+    // 用于在查找代表节点的时候，进行回溯各个途径节点
     private int[] help;
     // 一共有多少个集合
     private int sets;
 
     /**
      * 代表有多个集合
+     *
      * @param N
      */
     public UnionFind(int N) {
@@ -44,13 +46,19 @@ public class UnionFind {
     }
 
     /**
-     * 集合关联
+     * 将两个元素进行关联
+     * <p>
+     * 关联后，属于同一个集合
+     * 调用这个方法，说明，i和j是一个集合中的，需要统一下代表节点，更新一下非联通集合数
+     *
      * @param i
      * @param j
      */
     public void union(int i, int j) {
         int f1 = find(i);
         int f2 = find(j);
+        // 代表节点相等，说明已经在一个集合中，不进行下一步处理
+        // 代表节点不相等，不一定是一个集合里面的
         if (f1 != f2) {
             if (size[f1] >= size[f2]) {
                 size[f1] += size[f2];
@@ -61,10 +69,12 @@ public class UnionFind {
             }
             sets--;
         }
+
     }
 
     /**
      * 集合数量
+     *
      * @return
      */
     public int sets() {
