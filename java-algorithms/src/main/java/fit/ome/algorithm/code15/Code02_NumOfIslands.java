@@ -77,9 +77,9 @@ public class Code02_NumOfIslands {
         public int[] find(int i, int j) {
             int[] res=new int[]{i,j};
             int hi = 0;// 记录路径使用的位置
-            while (res[0] != parent[i][j][0] || res[1] != parent[i][j][1]) {
+            while (res[0] != parent[res[0]][res[1]][0] || res[1] != parent[res[0]][res[1]][1]) {
                 help[hi++] = res;
-                res = parent[i][j];
+                res = parent[res[0]][res[1]];
             }
             for (hi--; hi >= 0; hi--) {
                 parent[help[hi][0]][help[hi][1]] = res;
