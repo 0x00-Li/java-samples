@@ -99,11 +99,9 @@ public class Code0399 {
                 parent[rooti] = rootj;
                 weight[rooti] = weight[j] * v / weight[i];
             }
-
         }
 
         public int find(int i) {
-
             if (i != parent[i]) {
                 int origin = parent[i];
                 parent[i] = find(parent[i]);
