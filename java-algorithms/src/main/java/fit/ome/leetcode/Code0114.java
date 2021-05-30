@@ -1,6 +1,9 @@
 package fit.ome.leetcode;
 
 import javax.swing.tree.TreeNode;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Stack;
 import java.util.TreeMap;
 
 /**
@@ -41,6 +44,31 @@ public class Code0114 {
             pre(r);
         }
 
+    }
+
+    /**
+     * 迭代实现
+     *
+     * @param root
+     */
+    public void flatten1(TreeNode root) {
+        Stack<TreeNode> stack = new Stack<>();
+
+        TreeNode node = root;
+        while (node != null) {
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            node.right = node.left;
+            node.left = null;
+            if(node.right!=null){
+                node = node.right;
+            }
+
+            if (node == null && !stack.isEmpty()) {
+                node = stack.pop();
+            }
+        }
     }
 
     public class TreeNode {
