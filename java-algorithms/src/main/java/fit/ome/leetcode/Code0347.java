@@ -49,6 +49,10 @@ public class Code0347 {
             count = c;
         }
 
+    }
+
+    // ============
+    public static class EnhanceHeap {
 
     }
 }
